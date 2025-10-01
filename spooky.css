@@ -39,7 +39,51 @@
   ::-webkit-scrollbar { width: 12px; height:12px; }
   ::-webkit-scrollbar-track { background: linear-gradient(180deg,#08080a,#0d0d11); border-radius:10px;}
   ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,var(--accent),var(--accent-2)); border-radius:10px; box-shadow: inset 0 0 6px rgba(0,0,0,0.6);}
-  
+
+  /* ---------- Flying Bats Animation (ADDED) ---------- */
+.flying-bat {
+  position: fixed;
+  font-size: 2rem;
+  pointer-events: none;
+  z-index: 999;
+  left: -50px;
+}
+
+.flying-bat--1 {
+  top: 20%;
+  animation: flyAcrossScreen 15s linear infinite;
+  animation-delay: 0s;
+}
+
+.flying-bat--2 {
+  top: 40%;
+  animation: flyAcrossScreen 15s linear infinite;
+  animation-delay: 5s;
+}
+
+.flying-bat--3 {
+  top: 60%;
+  animation: flyAcrossScreen 15s linear infinite;
+  animation-delay: 10s;
+}
+
+@keyframes flyAcrossScreen {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(30vw) translateY(-30px);
+  }
+  50% {
+    transform: translateX(60vw) translateY(0);
+  }
+  75% {
+    transform: translateX(90vw) translateY(20px);
+  }
+  100% {
+    transform: translateX(120vw) translateY(0);
+  }
+}
   /* ---------- Header / Nav ---------- */
   .site-header{
     position:sticky;
