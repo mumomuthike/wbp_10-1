@@ -1,506 +1,164 @@
-/* =========================================================
-   Conjuring Spellcasting — styles.css
-   Pure CSS site: responsive, animated, parallax, interactive
-   ========================================================= */
+/* === Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=Butcherman&family=Roboto:wght@300;400;700&display=swap');
 
-/* ---------- Base / Variables ---------- */
-:root{
-    --bg:#0b0b0f;
-    --Ink:#0f1724;
-    --accent:#9b6aff;
-    --accent-2:#ff7aa2;
-    --muted:#9aa0a6;
-    --card:#0e0f14;
-    --glass: rgba(255,255,255,0.03);
-    --spooky-font: "Cinzel", "Uncial Antiqua", serif;
-    --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
-  
-  /* Import nice fonts (graceful fallback) */
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
-  
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    min-height:100vh;
-    background: linear-gradient(180deg, #05050a 0%, #0b0b0f 100%);
-    color: #e6eef8;
-    font-family: var(--ui-font);
-    line-height:1.45;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text x="0" y="22" font-size="20">🕯</text></svg>') 8 8, auto;
-    background-attachment: fixed;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Custom scrollbar for WebKit */
-  ::-webkit-scrollbar { width: 12px; height:12px; }
-  ::-webkit-scrollbar-track { background: linear-gradient(180deg,#08080a,#0d0d11); border-radius:10px;}
-  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,var(--accent),var(--accent-2)); border-radius:10px; box-shadow: inset 0 0 6px rgba(0,0,0,0.6);}
+/* === Theme Variables === */
+:root {
+  --pumpkin: #FF7518;
+  --witch-purple: #4B0082;
+  --monster-green: #228B22;
+  --black: #000;
+  --ghost: #FFF;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 2rem;
 
-  /* ---------- Flying Bats Animation (ADDED) ---------- */
+  --spooky-font: "Butcherman", cursive;
+  --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* === Global Reset === */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--ui-font);
+  color: var(--ghost);
+  background: url("cloudy-night.jpg") center/cover no-repeat fixed;
+  border: 12px solid #222;
+  padding: 12px;
+  background-clip: padding-box;
+  overflow-x: hidden;
+}
+
+/* === Headings & Text === */
+h1, h2, h3 {
+  font-family: var(--spooky-font);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+}
+p {
+  font-family: var(--ui-font);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  max-width: 700px;
+  margin: auto;
+}
+
+/* === Sticky Header & Nav === */
+header {
+  position: sticky;
+  top: 0;
+  background: var(--black);
+  color: var(--ghost);
+  padding: var(--space-2);
+  z-index: 1000;
+}
+nav a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--ghost);
+  text-decoration: none;
+  transition: transform .2s, color .2s;
+}
+nav a:hover,
+nav a:focus {
+  color: var(--pumpkin);
+  transform: translateY(-2px);
+}
+
+/* === Page Sections === */
+.page {
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Haunted House Image (Page Two) === */
+.house {
+  max-width: 500px;
+  width: 80%;
+  height: auto;
+  margin-top: var(--space-3);
+  z-index: 5;
+}
+
+/* === Gravestone (Page One Corner) === */
+.gravestone {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
+  z-index: 10;
+}
+
+/* === Ghosts (Image-based, Floating) === */
+.ghost {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  opacity: 0.85;
+  animation: floaty 6s ease-in-out infinite;
+  z-index: 6;
+}
+.ghost--a { top: 20%; left: 10%; }
+.ghost--b { top: 35%; right: 15%; animation-delay: 2s; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+/* === Flying Bats === */
 .flying-bat {
-  position: fixed;
-  font-size: 2rem;
-  pointer-events: none;
-  z-index: 999;
-  left: -50px;
+  position: absolute;
+  width: 100px;
+  height: auto;
+  z-index: 7;
+  animation: bat-fly 12s linear infinite;
+}
+.flying-bat--a { top: 10%; left: -120px; }
+.flying-bat--b { top: 40%; left: -150px; animation-delay: 5s; }
+
+@keyframes bat-fly {
+  0%   { transform: translateX(0) rotate(0deg); }
+  50%  { transform: translateX(120vw) rotate(15deg); }
+  100% { transform: translateX(0) rotate(-15deg); }
 }
 
-.flying-bat--1 {
-  top: 20%;
-  animation: flyAcrossScreen 15s linear infinite;
-  animation-delay: 0s;
+/* === The footer === */
+footer {
+  background: var(--black);
+  color: var(--ghost);
+  text-align: center;
+  padding: var(--space-3);
+  font-size: 0.9rem;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.7);
 }
 
-.flying-bat--2 {
-  top: 40%;
-  animation: flyAcrossScreen 15s linear infinite;
-  animation-delay: 5s;
+/* === less motion === */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
 }
 
-.flying-bat--3 {
-  top: 60%;
-  animation: flyAcrossScreen 15s linear infinite;
-  animation-delay: 10s;
+/* === responsive page === */
+@media (max-width: 768px) {
+  .house { max-width: 300px; }
+  .ghost, .flying-bat { width: 80px; }
+  .gravestone { width: 80px; }
 }
-
-@keyframes flyAcrossScreen {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  25% {
-    transform: translateX(30vw) translateY(-30px);
-  }
-  50% {
-    transform: translateX(60vw) translateY(0);
-  }
-  75% {
-    transform: translateX(90vw) translateY(20px);
-  }
-  100% {
-    transform: translateX(120vw) translateY(0);
-  }
+@media (max-width: 480px) {
+  h1 { font-size: 1.8rem; }
+  p { font-size: 1rem; }
+  .house { max-width: 220px; }
 }
-  /* ---------- Header / Nav ---------- */
-  .site-header{
-    position:sticky;
-    top:0;
-    z-index:60;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:1rem;
-    padding:0.75rem 1rem;
-    backdrop-filter: blur(6px) saturate(120%);
-    background: linear-gradient(180deg, rgba(5,5,8,0.6), rgba(10,10,12,0.2));
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-  }
-  
-  .logo{
-    font-family: var(--spooky-font);
-    letter-spacing: 0.12em;
-    font-weight:700;
-    font-size:1.1rem;
-    color: #f6f7ff;
-  }
-  .logo .accent{ color: var(--accent); margin-left:0.2rem; font-size:1.05rem; }
-  
-  .main-nav{ display:flex; gap:0.5rem; align-items:center; }
-  .nav-link{
-    color:var(--muted);
-    text-decoration:none;
-    padding:0.45rem 0.6rem;
-    border-radius:6px;
-    transition: all 220ms ease;
-    font-weight:500;
-  }
-  .nav-link:hover, .nav-link:focus{ color:#fff; transform:translateY(-3px); box-shadow: 0 6px 20px rgba(155,106,255,0.08)}
-  
-  /* ---------- Book / Page Flip Concept (CSS only with :target) ---------- */
-  .book{
-    perspective:1600px;
-    transform-style:preserve-3d;
-    margin: 1.25rem;
-    min-height: calc(100vh - 120px);
-    transition: transform 900ms cubic-bezier(.2,.8,.2,1);
-  }
-  
-  /* Each page occupies full viewport and stacks in 3D */
-  .page{
-    min-height: calc(100vh - 120px);
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-    transform-origin: center left;
-    background: linear-gradient(180deg, rgba(12,12,14,0.6), rgba(7,7,8,0.4));
-    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-    display:block;
-    padding: 2rem;
-    transition: transform 900ms cubic-bezier(.2,.8,.2,1), opacity 600ms;
-  }
-  
-  /* Front page visible by default */
-  .page--front{ z-index:2; transform: rotateY(0deg) translateZ(0); opacity:1; }
-  .page--back{
-    position: absolute;
-    inset: 0;
-    transform: rotateY(-40deg) translateZ(-120px) translateX(40px) scale(0.98);
-    opacity:0.0;
-    z-index:1;
-  }
-  
-  /* When #house is targeted, flip the book */
-  #house:target ~ .book .page--front,
-  #house:target ~ .book .page--back{
-    /* Not used — we use sibling selection in the DOM order (simpler approach below) */
-  }
-  
-  /* Use :target on sections themselves to animate (each page reacts when targeted) */
-  .page:target{ transform: rotateY(0deg) translateZ(0) scale(1); opacity:1; z-index:5; }
-  .page:target ~ .page{ opacity:0.5; transform: rotateY(-40deg) translateZ(-120px) translateX(40px) scale(0.98) }
-  
-  /* If no :target, ensure home looks front (use :target fallback by targeting body) */
-  :root:not(:target) .page--front{ transform: rotateY(0deg) translateZ(0); opacity:1; z-index:5; }
-  
-  /* ---------- Parallax layers (background illusion via fixed backgrounds & pseudo elements) ---------- */
-  .parallax{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    opacity:0.9;
-  }
-  
-  /* Sky + stars layer */
-  .parallax--sky{
-    background-image: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px), linear-gradient(180deg, #0b0b14 0%, rgba(11,7,20,0.5) 60%, rgba(6,4,10,0.8) 100%);
-    background-size: 200px 200px, 120px 120px, cover;
-    background-position: 10% 10%, 60% 20%, center;
-    background-attachment: fixed;
-    filter: saturate(0.9) contrast(1.05) blur(0.1px);
-    mix-blend-mode: screen;
-    opacity:0.9;
-  }
-  
-  /* Misty fog layer */
-  .parallax--fog{
-    background-image: linear-gradient(180deg, rgba(5,5,7,0.0), rgba(10,8,12,0.65) 60%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400"><g fill="%23ffffff" opacity="0.03"><circle cx="200" cy="120" r="100"/><circle cx="500" cy="60" r="80"/><circle cx="900" cy="140" r="120"/></g></svg>');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center top;
-    mix-blend-mode: screen;
-    opacity:0.95;
-  }
-  
-  /* ---------- Content layout: grid & flex ---------- */
-  .content-grid{
-    position:relative;
-    z-index: 5;
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:2rem;
-    align-items: start;
-    max-width:1200px;
-    margin: 3rem auto;
-  }
-  
-  /* Intro text card */
-  .intro{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.03);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 14px 40px rgba(2,2,4,0.6);
-  }
-  
-  /* Titles */
-  h1, h2 {
-    font-family: var(--spooky-font);
-    margin:0 0 .5rem 0;
-    color: #f7f3ff;
-    letter-spacing:0.02em;
-  }
-  h1{ font-size:clamp(1.6rem, 2.6vw, 2.8rem) }
-  h2{ font-size: clamp(1.2rem, 2.0vw, 1.8rem) }
-  .lede{ color: #cdd7ea; font-weight:300; margin-top:0.6rem; font-size:1.05rem; }
-  
-  /* CTA buttons */
-  .btn{
-    display:inline-block;
-    background: linear-gradient(180deg, rgba(155,106,255,0.14), rgba(255,122,162,0.06));
-    border: 1px solid rgba(155,106,255,0.18);
-    color: white;
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    text-decoration:none;
-    transition: transform 240ms ease, box-shadow 240ms;
-    font-weight:600;
-  }
-  .btn:hover, .btn:focus{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(155,106,255,0.12) }
-  .btn--ghost{ background: transparent; border-color: rgba(255,255,255,0.04); color: var(--muted) }
-  
-  /* Scene aside (illustration area) */
-  .scene{
-    position:relative;
-    min-height: 320px;
-    border-radius: 12px;
-    overflow:hidden;
-    background: linear-gradient(180deg, rgba(20,14,30,0.18), rgba(8,6,12,0.18));
-    border: 1px solid rgba(255,255,255,0.02);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  
-  /* Moon */
-  .moon{
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #fff7d6 0%, #fff0b8 10%, #ffd9a6 18%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0) 50%), linear-gradient(180deg,#2b2a33,#0f0d16);
-    box-shadow: 0 8px 40px rgba(255,200,120,0.06), 0 0 120px rgba(255,180,120,0.03) inset;
-    transform: translateY(-12px);
-    animation: moon-bob 6s ease-in-out infinite;
-  }
-  
-  /* subtle moon float */
-  @keyframes moon-bob {
-    0%{ transform: translateY(-12px) }
-    50%{ transform: translateY(-20px) }
-    100%{ transform: translateY(-12px) }
-  }
-  
-  /* Ghosts: soft translucent shapes that float */
-  .ghost{
-    position:absolute;
-    width:120px;
-    height:160px;
-    background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.85) 12%, rgba(255,255,255,0.06) 40%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border-radius: 50% 50% 40% 40%;
-    opacity:0;
-    filter: blur(0.4px) contrast(1.02);
-    transform-origin:center;
-    transition: opacity 420ms ease, transform 700ms cubic-bezier(.2,.9,.2,1);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-  }
-  
-  /* initial positioning */
-  .ghost--a{ right: 18%; top: 18%; transform: translateY(10px) scale(.95) }
-  .ghost--b{ right: 6%; bottom: 8%; width:90px; height:120px; transform: translateY(-6px) scale(.84) }
-  
-  /* ghost floating animation (subtle) */
-  @keyframes floaty {
-    0%{ transform: translateY(0) }
-    50%{ transform: translateY(-20px) }
-    100%{ transform: translateY(0) }
-  }
-  
-  /* Bats: tiny silhouette shapes created with pseudo-elements */
-  .bat{
-    position:absolute;
-    width:60px;
-    height:30px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.9));
-    border-radius: 50% 50% 10% 10%;
-    transform-origin:center;
-    opacity:0.85;
-    mix-blend-mode:multiply;
-    filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
-  }
-  
-  /* wings with pseudo elements */
-  .bat:before, .bat:after{
-    content:"";
-    position:absolute;
-    top:-10px;
-    width:30px;
-    height:30px;
-    background: inherit;
-    border-radius: 50%;
-  }
-  .bat:before{ left:-18px; transform: rotate(-18deg) }
-  .bat:after{ right:-18px; transform: rotate(18deg) }
-  
-  .bat--one{ left: -8%; top: 28%; animation: bat-fly 18s linear infinite; opacity:0.95; transform:scale(.9) }
-  .bat--two{ left: 5%; top: 8%; animation: bat-fly 14s linear infinite -4s; transform:scale(.7) }
-  
-  /* bats glide across and loop */
-  @keyframes bat-fly {
-    0%{ transform: translateX(-30vw) translateY(0) rotate(0deg) }
-    25%{ transform: translateX(10vw) translateY(-3vh) rotate(-10deg) }
-    50%{ transform: translateX(40vw) translateY(2vh) rotate(6deg) }
-    75%{ transform: translateX(10vw) translateY(-6vh) rotate(-8deg) }
-    100%{ transform: translateX(-30vw) translateY(0) rotate(0deg) }
-  }
-  
-  /* ---------- House page layout ---------- */
-  .house-viewport{
-    position:relative;
-    z-index:5;
-    max-width:1100px;
-    margin: 2.5rem auto;
-    padding: 1rem;
-  }
-  .house-columns{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:1.2rem;
-  }
-  
-  .house-header{ text-align:center; margin-bottom:1rem }
-  .house-sub{ color:var(--muted); margin-top:0.4rem }
-  
-  /* Big house visual: built with layered divs and shadows */
-  .big-house{
-    position:relative;
-    min-height: 420px;
-    border-radius: 12px;
-    overflow:visible;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    padding:2rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    border: 1px solid rgba(255,255,255,0.02);
-  }
-  
-  /* base silhouette */
-  .house-layer{
-    position:absolute;
-    left:50%;
-    transform: translateX(-50%);
-    width:86%;
-    height: 56%;
-    bottom: 36px;
-    border-radius: 6px;
-    mix-blend-mode: multiply;
-    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
-  }
-  .house-layer--base{
-    background: linear-gradient(180deg,#0b0b0f 0%, #121217 100%);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.8), inset 0 12px 40px rgba(255,255,255,0.02);
-    clip-path: polygon(0 30%, 15% 10%, 30% 0, 70% 0, 85% 10%, 100% 30%, 100% 100%, 0 100%);
-  }
-  .house-layer--details{
-    width:60%;
-    height:46%;
-    bottom: 80px;
-    background-image: linear-gradient(90deg, rgba(155,106,255,0.06), rgba(255,122,162,0.03));
-    filter: blur(0.6px);
-    opacity:0.85;
-  }
-  
-  /* Windows (interactive) */
-  .window{
-    position:absolute;
-    width:90px;
-    height:110px;
-    background: linear-gradient(180deg, rgba(20,16,28,0.85), rgba(20,16,28,0.6));
-    border-radius:8px;
-    left:18%;
-    top:18%;
-    box-shadow: inset 0 2px 12px rgba(0,0,0,0.6);
-    opacity:0.9;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:transparent;
-    border: 1px solid rgba(255,255,255,0.02);
-    transition: transform 420ms ease, box-shadow 420ms ease, color 220ms ease;
-    cursor: pointer;
-    padding:0.6rem;
-    text-align:center;
-  }
-  .window--right{ left:auto; right:12%; top:26%; transform: scale(.98) }
-  
-  /* reveal text on focus/hover */
-  .window:focus, .window:hover{
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    color:#fff;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(155,106,255,0.03));
-  }
-  
-  /* Cards layout uses CSS Grid */
-  .cards{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:1rem;
-    margin-top:1.4rem;
-  }
-  .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    padding:1rem;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.02);
-    transition: transform 380ms cubic-bezier(.2,.8,.2,1), box-shadow 380ms;
-    backdrop-filter: blur(3px);
-  }
-  .card:hover{ transform: translateY(-8px) scale(1.02); box-shadow: 0 18px 50px rgba(0,0,0,0.6); }
-  
-  /* Porch button */
-  .porch{ position:absolute; bottom:-10px; width:100%; display:flex; justify-content:center; }
-  
-  /* Footer */
-  .site-footer{
-    margin: 3rem auto 1rem;
-    padding: 1.2rem;
-    max-width:1200px;
-    border-radius:8px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.02);
-    text-align:center;
-    color:var(--muted);
-  }
-  .credit-line{ font-weight:600; margin:0 0 .35rem 0; color:#f6f4ff }
-  
-  /* ---------- Interactivity hints: when user focuses on page, show ghosts ---------- */
-  .page:focus-within .ghost,
-  .page:hover .ghost{
-    opacity:0.95;
-    animation: floaty 6s ease-in-out infinite;
-  }
-  
-  /* When the house page is targeted, make house details pop */
-  #house:target .house-layer--details{ transform: translateY(-16px) rotate(-2deg) scale(1.01) }
-  #house:target .house-layer--base{ transform: translateY(-6px) rotate(0.6deg) }
-  
-  /* On hover over house, windows glow and bats speed up */
-  .big-house:hover .window{ box-shadow: 0 30px 80px rgba(155,106,255,0.08) }
-  .big-house:hover .bat{ animation-duration: 9s; opacity:1 }
-  
-  /* Responsive & media queries (mobile-first) */
-  @media (max-width: 880px){
-    .content-grid{ grid-template-columns: 1fr; padding: 1rem; margin: 2rem 1rem; }
-    .scene{ min-height: 260px }
-    .main-nav{ gap:0.25rem }
-    .house-viewport{ padding:0.5rem }
-    .cards{ grid-template-columns: repeat(2, 1fr) }
-    .card{ font-size:0.95rem }
-    .bat{ display:none } /* reduce motion on small screens */
-    .ghost{ width:90px; height:110px }
-  }
-  
-  @media (max-width:480px){
-    .content-grid{ gap:1rem }
-    .intro{ padding:1.25rem }
-    .cards{ grid-template-columns: 1fr }
-    .logo{ font-size:1rem }
-    .moon{ width:100px; height:100px }
-    .house-layer--base{ height:62% }
-    .page{ padding:1rem }
-  }
-  
-  /* Respect prefers-reduced-motion */
-  @media (prefers-reduced-motion: reduce){
-    .bat, .ghost, .moon{ animation: none !important; transition: none !important; }
-    .bat{ display:none }
-  }
-  
-  /* small visual flourish for focus outlines */
-  a:focus, .window:focus{ outline: 3px solid rgba(155,106,255,0.15); outline-offset:3px; border-radius:8px; }
-  
