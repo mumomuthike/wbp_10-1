@@ -1,126 +1,57 @@
-<!-- spooky -->
-<!doctype html>
-
+!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Conjuring Spellcasting — A Spooky Scroll</title>
-  <link rel="stylesheet" href="spooky.css" />
+  <meta charset="UTF-8">
+  <title>Haunted Story</title>
+  <link rel="stylesheet" href="spooky.css">
+  <!-- Butcherman font -->
+  <link href="https://fonts.googleapis.com/css2?family=Butcherman&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Flying Bats (added) -->
-    <div class="flying-bat flying-bat--1">🦇</div>
+         <div class="flying-bat flying-bat--1">🦇</div>
   <div class="flying-bat flying-bat--2">🦇</div>
   <div class="flying-bat flying-bat--3">🦇</div>
   <header class="site-header" role="banner">
-    
-    <div class="logo">CONJUR<span class="accent">⚝</span>R</div>
-    <nav class="main-nav" role="navigation" aria-label="Primary">
-      <a href="#home" class="nav-link">Prologue</a>
-      <a href="#house" class="nav-link">The House</a>
-      <a href="#credits" class="nav-link">Credits</a>
+  <header>
+    <nav>
+      <a href="#page1">The Awakening</a>
+      <a href="#page2">The Haunted House</a>
     </nav>
   </header>
 
-  <!-- Container that will flip/transition when target changes -->
-  <main id="book" class="book">
-    <!-- Page 1: Prologue -->
-    <section id="home" class="page page--front" tabindex="-1" aria-labelledby="home-title">
-      <div class="parallax parallax--sky"></div>
-      <div class="content-grid">
-        <article class="intro">
-          <h1 id="home-title">A Spellcasting Spooktacular</h1>
-          <p class="lede">
-            They say the wind remembers the names of those who whisper at midnight. Tonight,
-            you step beyond the lamplight into a stitched-together town of shadows — a place
-            where doors sigh and portraits blink. Read on, and the house will answer.
-          </p>
 
-          <nav class="cta-row" aria-label="Explore">
-            <a href="#house" class="btn">Enter the House →</a>
-            <a href="#credits" class="btn btn--ghost">Who conjured this?</a>
-          </nav>
-        </article>
+  <!-- Page One -->
+  <section id="page1" class="page">
+    <div class="page-frame">
+      <img src="cloudynight.jpg" alt="Cloudy night sky" class="background-frame">
 
-        <aside class="scene">
-          <div class="moon"></div>
-          <!-- floating ghosts (hidden until hover/interactions) -->
-          <div class="ghost ghost--a" aria-hidden="true"></div>
-          <div class="ghost ghost--b" aria-hidden="true"></div>
-          <!-- bats that always drift subtly -->
-          <div class="bat bat--one" aria-hidden="true"></div>
-          <div class="bat bat--two" aria-hidden="true"></div>
-        </aside>
-      </div>
+      <h1>Welcome to the Spooktacular</h1>
+      <p>Dare to enter the cursed grounds? The mist grows thick, and shadows whisper your name...</p>
 
-      <footer class="page-footer">
-        <p>Scroll or use the nav — the pages will gently flip like leather-bound chapters.</p>
-      </footer>
-    </section>
+      <!-- Haunted House -->
+      <img src="hauntedhouse.png" alt="Haunted House" class="house">
 
-    <!-- Page 2: The House -->
-    <section id="house" class="page page--back" tabindex="-1" aria-labelledby="house-title">
-      <div class="parallax parallax--fog"></div>
+      <!-- Floating Ghosts -->
+      <img src="ghost1.png" alt="Ghost" class="ghost ghost1">
+      <img src="ghost2.png" alt="Ghost" class="ghost ghost2">
 
-      <div class="house-viewport">
-        <div class="house-columns">
-          <header class="house-header">
-            <h2 id="house-title">The Holloway House</h2>
-            <p class="house-sub">Cobwebbed corridors, rooms that breathe, a portrait with secrets.</p>
-          </header>
+      <!-- Flying Bats -->
+      <img src="bat.png" alt="Bat" class="bat bat1">
+      <img src="bat.png" alt="Bat" class="bat bat2">
 
-          <div class="house-body">
-            <div class="big-house">
-              <!-- layered illustration via CSS (contours, windows) -->
-              <div class="house-layer house-layer--base"></div>
-              <div class="house-layer house-layer--details"></div>
+      <!-- Gravestone in corner -->
+      <img src="gravestone.png" alt="Creepy gravestone" class="gravestone">
+    </div>
+  </section>
 
-              <!-- interactive conjuring elements (pure CSS hover) -->
-              <div class="window window--left" tabindex="0" title="Left window">
-                <div class="inside">A pale face watches.</div>
-              </div>
+  <!-- Page Two -->
+  <section id="page2" class="page">
+    <h1>The Haunted Mansion</h1>
+    <p>The deeper you wander, the more the house shifts, as if alive...</p>
+  </section>
 
-              <div class="window window--right" tabindex="0" title="Right window">
-                <div class="inside">Something taps at the glass.</div>
-              </div>
-
-              <div class="porch">
-                <a href="#home" class="btn btn--flip">Flip back</a>
-              </div>
-            </div>
-
-            <section class="cards">
-              <article class="card">
-                <h3>Room of Whispers</h3>
-                <p>Whisper into the cracks — the wall will answer with a secret from a past life.</p>
-              </article>
-
-              <article class="card">
-                <h3>Cellar Clock</h3>
-                <p>Every hour the clock steals a memory. Keep watch, lest it take yours.</p>
-              </article>
-
-              <article class="card">
-                <h3>Attic Mirror</h3>
-                <p>Hold the mirror to the moon and watch the reflection think for itself.</p>
-              </article>
-            </section>
-          </div>
-        </div>
-      </div>
-
-      <footer class="site-footer" id="credits">
-        <p class="credit-line">Designed & conjured by Mumo. “If the house has a heartbeat, it's listening.”</p>
-        <p class="small">Custom CSS — no JavaScript. Responsive, animated, spooky.</p>
-      </footer>
-    </section>
-  </main>
-
-  <!-- Accessibility: quick links -->
-  <div class="skip-links" aria-hidden="false">
-    <a href="#home">Go to Prologue</a>
-    <a href="#house">Go to The House</a>
-  </div>
+  <footer>
+    <p>© 2025 Your Haunted Tale — “Enter if you dare...”</p>
+  </footer>
 </body>
 </html>
