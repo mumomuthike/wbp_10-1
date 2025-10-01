@@ -77,6 +77,11 @@ nav a:focus {
   justify-content: center;
   align-items: center;
 }
+/* === Page Two Background === */
+
+#page2 {
+    background: url("page2background.png") center/cover no-repeat;
+    background-attachment: fixed;}
 
 /* === Haunted House Image (Page Two) === */
 .house {
